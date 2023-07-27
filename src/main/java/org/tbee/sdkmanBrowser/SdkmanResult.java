@@ -1,6 +1,6 @@
 package org.tbee.sdkmanBrowser;
 
-public record SdkmanResult(SdkmanPackage[] packages) {
+public record SdkmanResult(SdkmanPackage[] result) {
     /*
         {
             "result": [
