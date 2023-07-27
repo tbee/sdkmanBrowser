@@ -45,15 +45,20 @@ public class SdkmanBrowser implements Callable<Void>, Runnable {
         // https://api.sdkman.io/2/candidates/all
         // https://api.sdkman.io/2/candidates/maven/win/versions/all
         //
-        // Platforms: linuxx64, Darwin
+        // Platforms:
+        // - linux: linuxx32, linuxx64, linuxarm32hf, linuxarm32hf, linuxarm32hf, linuxarm64
+        // - macos: darwinx64, darwinarm64
+        // - windows: windowsx64
+        // - : exotic
+        // in ~/.sdkman/var/platform
         //
         // https://github.com/sdkman/sdkman-cli/blob/master/src/main/bash/sdkman-list.sh
         // https://github.com/sdkman/sdkman-candidates/blob/master/conf/routes
         // https://api.sdkman.io/2/candidates/default/maven
         // https://api.sdkman.io/2/candidates/all
         // https://api.sdkman.io/2/candidates/list
-        // https://api.sdkman.io/2/candidates/maven/win/versions/list
-        // https://api.sdkman.io/2/candidates/jvm/win/versions/list
+        // https://api.sdkman.io/2/candidates/maven/linuxx64/versions/list
+        // https://api.sdkman.io/2/candidates/jvm/linuxx64/versions/list
 
         try {
             URL candidatesUrl = new URL("https://api.sdkman.io/2/candidates/all");
@@ -63,7 +68,7 @@ public class SdkmanBrowser implements Callable<Void>, Runnable {
             String[] candidates = candidatesString.split(",");
             for (String candidate : candidates) {
 
-                URL versionsUrl = new URL("https://api.sdkman.io/2/candidates/" + candidate + "/win/versions/all");
+                URL versionsUrl = new URL("https://api.sdkman.io/2/candidates/" + candidate + "/windowsx64/versions/all");
                 String versionsString = read(versionsUrl.openStream());
                 System.out.println(candidate + " " + versionsUrl + ": " + versionsString);
             }
